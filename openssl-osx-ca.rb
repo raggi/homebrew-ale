@@ -3,13 +3,13 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.2.tar.gz'
-  sha1 '433fe02d490bac78898addc9ec332ab0f7b288de'
+  url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.3.tar.gz'
+  sha1 '8d6607c66b2fb454d1d79ef509fab7737f6eaaec'
 
   depends_on 'openssl'
 
   def install
-    system "make install PREFIX='#{prefix}'"
+    system "make install PREFIX='#{prefix}' BREW='#{HOMEBREW_PREFIX}/bin/brew'"
   end
 
   def caveats; <<-EOS.undent
