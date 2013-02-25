@@ -13,6 +13,10 @@ class OpensslOsxCa < Formula
   end
 
   def caveats; <<-EOS.undent
+    To get instant-on, please run:
+
+        openssl-osx-ca
+
     To uninstall remove the openssl-osx-ca line from your crontab. e.g.
 
         (crontab -l | grep -v openssl-osx-ca) | crontab -
