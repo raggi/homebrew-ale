@@ -3,8 +3,8 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.3.tar.gz'
-  sha1 '8d6607c66b2fb454d1d79ef509fab7737f6eaaec'
+  url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.4.tar.gz'
+  sha1 'e981eff696c0e4834cf55bd039021baf4fe1f8d2'
 
   depends_on 'openssl'
 
@@ -13,10 +13,6 @@ class OpensslOsxCa < Formula
   end
 
   def caveats; <<-EOS.undent
-    To get instant-on, please run:
-
-        openssl-osx-ca
-
     To uninstall remove the openssl-osx-ca line from your crontab. e.g.
 
         (crontab -l | grep -v openssl-osx-ca) | crontab -
@@ -24,7 +20,13 @@ class OpensslOsxCa < Formula
   end
 
   def test
+    openssl = File.join(Formula["openssl"].opt_prefix, "bin", "openssl")
     system "#{bin}/openssl-osx-ca"
     system "ls #{etc}/openssl/cert.pem"
+    system <<-SHELL
+      echo '' |
+      #{openssl} s_client -verify 10 -CApath \? -connect github.com:443 -status |
+      grep 'Verify return code' | grep '(ok)'
+    SHELL
   end
 end
