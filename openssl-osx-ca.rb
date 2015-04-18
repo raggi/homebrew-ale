@@ -3,8 +3,8 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.4.tar.gz'
-  sha1 'e981eff696c0e4834cf55bd039021baf4fe1f8d2'
+  url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.5.tar.gz'
+  sha1 '244b7f336c31bda68b351451f5611d9b91e43dda'
 
   depends_on 'openssl'
 
