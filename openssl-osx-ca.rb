@@ -4,7 +4,7 @@ class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
   url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.5.tar.gz'
-  sha1 '244b7f336c31bda68b351451f5611d9b91e43dda'
+  sha256 '924dfa2385bb2e845ac8b8be07ce19c0d2cb56ce9459affdd9c9c31e9589a9aa'
 
   depends_on 'openssl'
 
