@@ -6,10 +6,21 @@ class OpensslOsxCa < Formula
   url 'https://github.com/raggi/openssl-osx-ca/archive/2.0.0.tar.gz'
   sha256 '8d7ff2492ee324b77ab7c6a6b4af2d15b4429b692ac075da4714474fc71c4aa2'
 
+  option "without-system-keychain", "Do not include System.keychain certificates"
+  option "without-login-keychain", "Do not include login.keychain certificates"
+
   depends_on 'openssl'
 
   def install
-    system "make copy PREFIX='#{prefix}' BINDIR='#{bin}' BREW='#{HOMEBREW_PREFIX}/bin/brew'"
+    args = %w[system-keychain login-keychain].map do |opt|
+      "--skip-#{opt}" if build.without? opt
+    end.join ' '
+
+    system "make", "copy",
+      "PREFIX=#{prefix}",
+      "BINDIR=#{bin}",
+      "ARGS=#{args}",
+      "BREW=#{HOMEBREW_PREFIX}/bin/brew"
   end
 
   def caveats
