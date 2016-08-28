@@ -3,20 +3,27 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/1.0.5.tar.gz'
-  sha256 '924dfa2385bb2e845ac8b8be07ce19c0d2cb56ce9459affdd9c9c31e9589a9aa'
+  url 'https://github.com/raggi/openssl-osx-ca/archive/2.0.0.tar.gz'
+  sha256 '8d7ff2492ee324b77ab7c6a6b4af2d15b4429b692ac075da4714474fc71c4aa2'
 
   depends_on 'openssl'
 
   def install
-    system "make install PREFIX='#{prefix}' BREW='#{HOMEBREW_PREFIX}/bin/brew'"
+    system "make copy PREFIX='#{prefix}' BINDIR='#{bin}' BREW='#{HOMEBREW_PREFIX}/bin/brew'"
   end
 
-  def caveats; <<-EOS.undent
-    To uninstall remove the openssl-osx-ca line from your crontab. e.g.
+  def caveats
+    if `crontab -l | grep -v openssl-osx-ca` !~ /^\s*$/
+      <<-EOS.undent
+    To uninstall older versions of openssl-osx-ca from your crontab. e.g.
 
         (crontab -l | grep -v openssl-osx-ca) | crontab -
-    EOS
+      EOS
+    end
+  end
+
+  def plist
+    File.read "#{prefix}/Library/LaunchAgents/org.ra66i.openssl-osx-ca.plist"
   end
 
   def test
