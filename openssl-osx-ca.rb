@@ -3,8 +3,8 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/2.0.0.tar.gz'
-  sha256 '8d7ff2492ee324b77ab7c6a6b4af2d15b4429b692ac075da4714474fc71c4aa2'
+  url 'https://github.com/raggi/openssl-osx-ca/archive/2.0.1.tar.gz'
+  sha256 'e2c805b0f0c2013b57b96d0649247ccc3d406c88c30dde92ad0def418f683587'
 
   option "without-system-keychain", "Do not include System.keychain certificates"
   option "without-login-keychain", "Do not include login.keychain certificates"
