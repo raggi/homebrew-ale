@@ -3,23 +3,15 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/2.0.1.tar.gz'
-  sha256 'e2c805b0f0c2013b57b96d0649247ccc3d406c88c30dde92ad0def418f683587'
-
-  option "without-system-keychain", "Do not include System.keychain certificates"
-  option "without-login-keychain", "Do not include login.keychain certificates"
+  url 'https://github.com/raggi/openssl-osx-ca/archive/3.0.0.tar.gz'
+  sha256 '8761e30bb7973a8d2350a9d03d8d410814027a3d0fc68435b2dcad1c3f1a4664'
 
   depends_on 'openssl'
 
   def install
-    args = %w[system-keychain login-keychain].map do |opt|
-      "--skip-#{opt}" if build.without? opt
-    end.join ' '
-
     system "make", "copy",
       "PREFIX=#{prefix}",
       "BINDIR=#{bin}",
-      "ARGS=#{args}",
       "BREW=#{HOMEBREW_PREFIX}/bin/brew"
   end
 
@@ -39,7 +31,7 @@ class OpensslOsxCa < Formula
 
   def test
     openssl = File.join(Formula["openssl"].opt_prefix, "bin", "openssl")
-    system "#{bin}/openssl-osx-ca"
+    system "#{bin}/openssl-osx-ca", "-path", "#{bin}/osx-ca-certs"
     system "ls #{etc}/openssl/cert.pem"
     system <<-SHELL
       echo '' |
