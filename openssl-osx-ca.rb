@@ -3,8 +3,8 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/5.0.0.tar.gz'
-  sha256 'a02ccbb8d1dc21c2acba424d804c5855038d05b0d43a28822cd25bc3ac700c10'
+  url 'https://github.com/raggi/openssl-osx-ca/archive/5.0.1.tar.gz'
+  sha256 '1982733624a81c9164e8b15f28550e0f55f26724f48737880285f4b3890a649c'
 
   def install
     system "make", "copy",
@@ -30,10 +30,11 @@ class OpensslOsxCa < Formula
   def test
     openssl = File.join(Formula["openssl"].opt_prefix, "bin", "openssl")
     system "#{bin}/openssl-osx-ca", "-path", "#{bin}/osx-ca-certs"
-    system "ls #{etc}/openssl/cert.pem"
+    cafile = "#{Formula["openssl"].etc}/#{Formula["openssl"].full_name}/cert.pem"
+    system "ls #{cafile}"
     system <<-SHELL
       echo '' |
-      #{openssl} s_client -verify 10 -CApath \? -connect github.com:443 -status |
+      #{openssl} s_client -verify 10 -CAfile #{cafile} -connect github.com:443 -status |
       grep 'Verify return code' | grep '(ok)'
     SHELL
   end
