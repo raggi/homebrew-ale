@@ -3,8 +3,8 @@ require 'formula'
 class OpensslOsxCa < Formula
   homepage 'https://github.com/raggi/openssl-osx-ca#readme'
   head 'https://github.com/raggi/openssl-osx-ca.git'
-  url 'https://github.com/raggi/openssl-osx-ca/archive/5.0.1.tar.gz'
-  sha256 '1982733624a81c9164e8b15f28550e0f55f26724f48737880285f4b3890a649c'
+  url 'https://github.com/raggi/openssl-osx-ca/archive/5.1.0.tar.gz'
+  sha256 'ae595c2e346f01b12a61e01f28608d0d86c1020ded9d27cc3bf59630b794031d'
 
   def install
     system "make", "copy",
