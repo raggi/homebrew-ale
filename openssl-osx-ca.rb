@@ -23,8 +23,11 @@ class OpensslOsxCa < Formula
     end
   end
 
-  def plist
-    File.read "#{prefix}/Library/LaunchAgents/org.ra66i.openssl-osx-ca.plist"
+  service do
+    run [bin/"openssl-ox-ca", "#{HOMEBREW_PREFIX}/bin/brew"]
+    run_type :interval
+    interval 3600
+    keep_alive true
   end
 
   def test
