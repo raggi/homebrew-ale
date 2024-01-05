@@ -24,7 +24,7 @@ class OpensslOsxCa < Formula
   end
 
   service do
-    run [bin/"openssl-osx-ca", "#{HOMEBREW_PREFIX}/bin/brew"]
+    run [bin/"openssl-osx-ca", "-path", opt_bin/"osx-ca-certs", "#{HOMEBREW_PREFIX}/bin/brew"]
     run_type :interval
     interval 3600
     keep_alive true
