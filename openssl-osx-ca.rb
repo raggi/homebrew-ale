@@ -15,7 +15,7 @@ class OpensslOsxCa < Formula
 
   def caveats
     if `crontab -l | grep -v openssl-osx-ca` !~ /^\s*$/
-      <<-EOS.undent
+      <<-EOS
     To uninstall older versions of openssl-osx-ca from your crontab. e.g.
 
         (crontab -l | grep -v openssl-osx-ca) | crontab -
