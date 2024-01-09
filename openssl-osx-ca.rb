@@ -27,7 +27,6 @@ class OpensslOsxCa < Formula
     run [bin/"openssl-osx-ca", "-path", "#{HOMEBREW_PREFIX}/bin/osx-ca-certs", "#{HOMEBREW_PREFIX}/bin/brew"]
     run_type :interval
     interval 3600
-    keep_alive true
   end
 
   def test
